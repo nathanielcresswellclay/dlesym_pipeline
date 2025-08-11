@@ -1,0 +1,8 @@
+# directories with output in the name 
+output/
+# pycache files
+__pycache__/
+# Python bytecode files
+*.pyc
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
