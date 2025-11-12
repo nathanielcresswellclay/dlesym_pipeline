@@ -1,0 +1,15 @@
+requests:
+  - variable_name: volumetric_soil_water_layer_1
+    start_year: 1980
+    end_year: 1980
+    time_freq: 3 # in hours starting at 00:00
+    output_file: ./retrieval/outputs/era5_land_0.25deg_3h_swvl1_test.nc
+    time_chunk_size: 64
+    overwrite: False
+  - variable_name: soil_temperature_level_1
+    start_year: 1980
+    end_year: 1981
+    time_freq: 3
+    output_file: ./retrieval/outputs/era5_land_0.25deg_3h_stl1_test.nc
+    time_chunk_size: 64
+    overwrite: true

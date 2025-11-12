@@ -42,7 +42,7 @@ def retrieve_request(
         overwrite:bool=False,
         time_chunks: int = 1,
         level: str = None,
-        accumulation_period: int = None
+        accumulation_period: int = None,
 ):
     """
     Utility to download and process ERA5 reanalysis data from Google Cloud Storage.
