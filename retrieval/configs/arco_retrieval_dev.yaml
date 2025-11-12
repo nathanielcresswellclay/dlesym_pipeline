@@ -1,42 +1,47 @@
 requests:
   - variable_name: volumetric_soil_water_layer_1
-    time_start: 2000-01-01T00:00:00Z
-    time_end: 2000-01-05T00:00:00Z
+    time_start: 2000-01-01T00:00:00
+    time_end: 2000-01-02T00:00:00
     time_freq: 3h
-    log_file: /pscratch/sd/n/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_arco_retrieval.log
-    partitions: 2
-    output_file: /pscratch/sd/n/nacc/training_data/era5_retrievals/era5_0.25deg_3h_swvl1_test.nc
+    output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_0.25deg_3h_swvl1_test.nc
     overwrite: true
+  - variable_name: total_column_water_vapour
+    time_start: 2000-01-01T00:00:00
+    time_end: 2000-01-02T00:00:00
+    time_freq: 3h
+    output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_0.25deg_3h_tcwv_test.nc
+    overwrite: true
+  - variable_name: specific_humidity
+    level: 1000.
+    time_start: 2000-01-01T00:00:00
+    time_end: 2000-01-02T00:00:00
+    time_freq: 3h
+    overwrite: true
+    output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_0.25deg_3h_q1000_test.nc
   - variable_name: geopotential
     level: 1000.
-    time_start: 2000-01-01T00:00:00Z
-    time_end: 2000-01-05T00:00:00Z
+    time_start: 2000-01-01T00:00:00
+    time_end: 2000-01-02T00:00:00
     time_freq: 3h
-    log_file: /pscratch/sd/n/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_arco_retrieval.log
-    partitions: 2
     overwrite: true
-    output_file: /pscratch/sd/n/nacc/training_data/era5_retrievals/era5_0.25deg_3h_z1000_test.nc
+    output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_0.25deg_3h_z1000_test.nc
   - variable_name: 2m_temperature
-    time_start: 2000-01-01T00:00:00Z
-    time_end: 2000-01-05T00:00:00Z
+    time_start: 2000-01-01T00:00:00
+    time_end: 2000-01-02T00:00:00
     time_freq: 3h
-    log_file: /pscratch/sd/n/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_arco_retrieval.log
-    partitions: 2
     overwrite: true
-    output_file: /pscratch/sd/n/nacc/training_data/era5_retrievals/era5_0.25deg_3h_t2m_test.nc
+    output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_0.25deg_3h_t2m_test.nc
   - variable_name: top_net_thermal_radiation
-    time_start: 2000-01-01T00:00:00Z
-    time_end: 2000-01-05T00:00:00Z
+    time_start: 2000-01-01T00:00:00
+    time_end: 2000-01-02T00:00:00
     time_freq: 3h
-    log_file: /pscratch/sd/n/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_arco_retrieval.log
-    partitions: 2
+    accumulation_period: 6
     overwrite: true
-    output_file: /pscratch/sd/n/nacc/training_data/era5_retrievals/era5_0.25deg_3h_ttr_test.nc
+    output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_0.25deg_3h_ttr6_test.nc
   - variable_name: total_precipitation
-    time_start: 2000-01-01T00:00:00Z
-    time_end: 2000-01-05T00:00:00Z
+    time_start: 2000-01-01T00:00:00
+    time_end: 2000-01-02T00:00:00
+    accumulation_period: 6
     time_freq: 3h
-    log_file: /pscratch/sd/n/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_arco_retrieval.log
-    partitions: 2
     overwrite: true
-    output_file: /pscratch/sd/n/nacc/training_data/era5_retrievals/era5_0.25deg_3h_tp_test.nc
+    output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_0.25deg_3h_tp6_test.nc
