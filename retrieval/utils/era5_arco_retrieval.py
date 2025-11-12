@@ -11,8 +11,8 @@ import dask
 from tqdm import tqdm
 from dask.diagnostics import ProgressBar
 import zarr
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def mirror_point_at_360(ds):
   extra_point = (
@@ -37,10 +37,12 @@ def interpolate(data, tri, mesh):
 
 def retrieve_request(
         variable_name:str,
-        times:np.array,
-        partitions: int,
+        times: np.ndarray,
         output_file:str,
-        overwrite:bool=False
+        overwrite:bool=False,
+        time_chunks: int = 1,
+        level: str = None,
+        accumulation_period: int = None
 ):
     """
     Utility to download and process ERA5 reanalysis data from Google Cloud Storage.
@@ -48,12 +50,15 @@ def retrieve_request(
     following DLWP data pipeline convenctions.
     Args:
         variable_name (str): Name of the variable to download, used for indexing
-        times (np.array): Array of times to download. 
-        partitions (int): Number of partitions to split the data into. This will 
-            dictate memory resources used during processing, check what makes sense
-            for your system.     
+        times (np.ndarray): Array of times to retrieve data for, should be in pandas datetime format.   
         output_file (str): Path to the output file. 
         overwrite (bool): If True, overwrite the output file if it already exists.
+        time_chunks (int): Number of time chunks to use for processing.
+        level (str): Atmospheric level to retrieve data for, e.g. '1000.' for 1000 hPa.
+        accumulation_period (int): If specified, the data will be accumulated over this period in hours. 
+            otherwise data will be treated as instantaneous values.
+    Returns:
+        None: The function saves the processed data to the specified output file.
     """
 
     if os.path.exists(output_file) and not overwrite:
@@ -71,81 +76,36 @@ def retrieve_request(
 
         # open dataset
         logger.info('Openning dataset...')
-        # reanalysis = xr.open_zarr(
-        #     'gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3', 
-        #     chunks={'time': 1},
-        #     consolidated=True,
-        # )
         ds = xr.open_zarr(
             'gs://gcp-public-data-arco-era5/ar/full_37-1h-0p25deg-chunk-1.zarr-v3',
-            chunks=None,
+            chunks={'time': time_chunks},
             storage_options=dict(token='anon'),
-        )
-        #.pipe(mirror_point_at_360)
-        # fs = fsspec.filesystem('gs')
-        # fs.ls('gs://gcp-public-data-arco-era5/co/')
+        )[variable_name]
 
-        # # open dataset
-        # logger.info('Openning dataset...')
-        # reanalysis = xr.open_zarr(
-        #     'gs://gcp-public-data-arco-era5/co/single-level-reanalysis.zarr', 
-        #     chunks={'time': 1},
-        #     consolidated=True,
-        # )#.pipe(mirror_point_at_360)
-
-        print(f'ds variables: {ds.data_vars}')
-        print(f'ds times: {ds.time}')
-        print(f'first 5 times : {ds.time.values[:5]}')
-        t = '2025-01-01T00:00:00.000000000'
-        print(f'last timestep of the dataset: {t} ', ds["volumetric_soil_water_layer_1"].sel(time=t).values)
-        exit()
-
-        # interpolate to 0.25 degree grid
-        logger.info('Interpolating to 0.25 degree grid...')
-        tri = build_triangulation(reanalysis.longitude, reanalysis.latitude)
-        longitude = np.linspace(0, 360, num=360*4+1)
-        latitude = np.linspace(-90, 90, num=180*4+1)
-        mesh = np.stack(np.meshgrid(longitude, latitude, indexing='ij'), axis=-1)
-
-        # split times into partitions
-        time_partitions = np.array_split(times, partitions)
-        parition_filenames = [f'{output_file}.p{i}' for i in range(partitions)]
-        pbar = tqdm(enumerate(time_partitions), total=partitions, ascii=True)
-        for i, partition in pbar:
-            pbar.set_description(f'Processing partition {i+1}/{partitions}...')
-
-            # select variable and times 
-            da = reanalysis[variable_name].sel(time=partition)
-            da_mesh = interpolate(da.values, tri, mesh)
-            da_ll = xr.DataArray(da_mesh, coords={'time': da.time.values, 'longitude': longitude, 'latitude': latitude}, dims=['time', 'longitude', 'latitude'])
-            da_ll.name = variable_name
-
-            # save partition file
-            da_ll.to_netcdf(parition_filenames[i])
-
-            # clean up
-            del da, da_mesh, da_ll
+        if level is not None:
+            # select the level
+            logger.info(f'Selecting level {level}...')
+            ds = ds.sel(level=level)
         
-        # merge partitions
-        logger.info('Merging partitions...')
-        da_ll = xr.open_mfdataset(parition_filenames, chunks={'time':1}, combine='by_coords', parallel=True)
-        # reorder lattitude, follow dlwp pipeline convention  
-        da_ll = da_ll.sel(latitude=slice(None, None, -1))
-        # remove last, redundant longitude
-        da_ll = da_ll.isel(longitude=slice(0, -1))
-        
-        # enforce dimesnions order: time, latitude, longitude
-        da_ll = da_ll.transpose('time', 'latitude', 'longitude')
-            
+        # if accumulation period is specified, accumulate the data
+        if accumulation_period is not None:
+            logger.info(f'Accumulating data over {accumulation_period} steps...')
+            ds = ds.rolling(time=accumulation_period, min_periods=1).sum()
+            # add note in metadata
+            ds.attrs['accumulation_period'] = accumulation_period
+
+        # select the times
+        ds = ds.sel(time=times)
+
+        # enforce chunking of time dimension
+        # ds = ds.chunk({'time': time_chunks})
         # save to netcdf file
         logger.info(f'Writing final {output_file}...')
         with ProgressBar():
-            da_ll.to_netcdf(output_file)
+            ds.to_netcdf(output_file)
         logger.info('Done.')
-        
-        # clean up
-        for f in parition_filenames:
-            os.remove(f)
+        # release memory
+        ds.close()
 
     return
 
@@ -167,15 +127,18 @@ def main(config: str):
         # Run the retrieval request
         retrieve_request(
             variable_name=request.variable_name,
-            times=pd.date_range(start=request.time_start, end=request.time_end, freq=request.time_freq),
-            partitions=request.partitions,
+            times=pd.date_range(start=request.time_start, end=request.time_end, freq=request.time_freq).to_numpy().astype('datetime64[ns]') ,
             output_file=request.output_file,
+            accumulation_period=request.get('accumulation_period', None),
+            level=request.get('level', None),
             overwrite=request.overwrite
         )
 
     
 
 if __name__ == "__main__":
+
+    # Parse command line arguments
     import argparse
     parser = argparse.ArgumentParser(description="Run ERA5 retrieval script.")
     parser.add_argument("--config", type=str, required=True, help="Path to the configuration file.")
