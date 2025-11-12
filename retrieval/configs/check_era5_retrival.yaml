@@ -1,0 +1,7 @@
+retreivals:
+  - source: era5
+    file_path: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_0.25deg_3h_tcwv_test.nc
+    plot_times: 
+      - 2000-01-01T12:00:00
+      - 2000-01-02T00:00:00
+
