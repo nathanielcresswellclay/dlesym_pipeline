@@ -1,0 +1,81 @@
+retreivals:
+  - source: era5
+    file_path: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_q1000.nc
+    output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/veggie-dltm_era5_check_q1000/
+    plot_times: 
+      - 1980-01-01T12:00:00
+      - 1990-01-02T00:00:00
+      - 2000-06-15T06:00:00
+      - 2010-12-31T18:00:00
+      - 2020-07-04T09:00:00
+      - 2024-12-11T21:00:00
+  - source: era5
+    file_path: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_tp6.nc
+    output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/veggie-dltm_era5_check_tp6/
+    plot_times: 
+      - 1980-01-01T12:00:00
+      - 1990-01-02T00:00:00
+      - 2000-06-15T06:00:00
+      - 2010-12-31T18:00:00
+      - 2020-07-04T09:00:00
+      - 2024-12-11T21:00:00
+  - source: era5
+    file_path: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_ttr6.nc
+    output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/veggie-dltm_era5_check_ttr6/
+    plot_times: 
+      - 1980-01-01T12:00:00
+      - 1990-01-02T00:00:00
+      - 2000-06-15T06:00:00
+      - 2010-12-31T18:00:00
+      - 2020-07-04T09:00:00
+      - 2024-12-11T21:00:00
+  - source: era5
+    file_path: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_t2m.nc
+    output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/veggie-dltm_era5_check_t2m/
+    plot_times: 
+      - 1980-01-01T12:00:00
+      - 1990-01-02T00:00:00
+      - 2000-06-15T06:00:00
+      - 2010-12-31T18:00:00
+      - 2020-07-04T09:00:00
+      - 2024-12-11T21:00:00
+  - source: era5
+    file_path: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_z1000.nc
+    output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/veggie-dltm_era5_check_z1000/
+    plot_times: 
+      - 1980-01-01T12:00:00
+      - 1990-01-02T00:00:00
+      - 2000-06-15T06:00:00
+      - 2010-12-31T18:00:00
+      - 2020-07-04T09:00:00
+      - 2024-12-11T21:00:00
+  - source: era5
+    file_path: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_q850.nc
+    output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/veggie-dltm_era5_check_q850/
+    plot_times: 
+      - 1980-01-01T12:00:00
+      - 1990-01-02T00:00:00
+      - 2000-06-15T06:00:00
+      - 2010-12-31T18:00:00
+      - 2020-07-04T09:00:00
+      - 2024-12-11T21:00:00
+  - source: era5
+    file_path: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_tcwv.nc
+    output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/veggie-dltm_era5_check_tcwv/
+    plot_times: 
+      - 1980-01-01T12:00:00
+      - 1990-01-02T00:00:00
+      - 2000-06-15T06:00:00
+      - 2010-12-31T18:00:00
+      - 2020-07-04T09:00:00
+      - 2024-12-11T21:00:00
+  - source: era5
+    file_path: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_swvl1.nc
+    output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/veggie-dltm_era5_check_swvl1/
+    plot_times: 
+      - 1980-01-01T12:00:00
+      - 1990-01-02T00:00:00
+      - 2000-06-15T06:00:00
+      - 2010-12-31T18:00:00
+      - 2020-07-04T09:00:00
+      - 2024-12-11T21:00:00
