@@ -51,23 +51,25 @@ def main(config: omegaconf.DictConfig):
 
             # run the requests
             for api_param, temp_file in zip(api_params, temp_files):
+
+                # check if temp file exists
+                if os.path.exists(temp_file) and not request.overwrite:
+                    logger.info(f'Temporary file {temp_file} exists and overwrite is False, skipping download...')
+                    continue
                 
+                # run the request
                 client = cds.Client()
                 client.retrieve("reanalysis-era5-land", api_param).download(temp_file)
 
             # combine yearly files if needed
             logger.info(f'Combining yearly files into final output: {request.output_file}')
-            ds_list = [xr.open_dataset(f) for f in temp_files]
-            ds_combined = xr.concat(ds_list, dim='valid_time')
+            ds_combined = xr.open_mfdataset(temp_files, combine='by_coords')
             # rename time dimension
             ds_combined = ds_combined.rename({'valid_time': 'time'})
             logger.info(f'Chunking to time:{request.time_chunk_size} and writing final output to {request.output_file}...')
-            ds_combined = ds_combined.chunk({'time': request.time_chunk_size})
+            ds_combined = ds_combined.chunk({'time': request.time_chunk_size, 'latitude': -1, 'longitude': -1})
             with ProgressBar():
                 ds_combined.to_netcdf(request.output_file, mode='w')
-            # close datasets
-            for ds in ds_list:
-                ds.close()
             ds_combined.close()
             # remove temporary files
             logger.info(f'Removing {len(temp_files)} temporary files...')
