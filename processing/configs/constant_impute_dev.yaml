@@ -1,0 +1,12 @@
+  # file with data to be imputed
+- filename: /home/disk/rhodium/dlwp/data/era5-land/0.25deg/era5_land_0.25deg_1980-2025_3h_swvl1.nc
+  variable: swvl1  # variable in the file that needs imputation
+  constant_value: 1.0  # constant value to impute over ocean
+  time_slice: 
+    start: 1980-01-01T00:00:00  # start time for slicing the data
+    end: 1980-01-05T21:00:00    # end time for slicing the data
+  chunks:
+    time: 256  # chunk size for processing the data
+  output_file: /home/disk/rhodium/dlwp/data/era5-land/0.25deg/constant_impute_ocean_dev.nc # output file path
+  overwrite: true  # whether to overwrite existing output file
+  output_plot_index: 10  # index for output plot visualization
