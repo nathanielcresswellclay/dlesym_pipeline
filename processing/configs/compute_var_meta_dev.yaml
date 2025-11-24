@@ -1,0 +1,43 @@
+  # file with data to be imputed
+- filename: /home/disk/rhodium/dlwp/data/ndvi/MCD19A3CMG.061/MCD19A3CMG.061_0.25deg_2000-2024_1-imputed_transposed.nc
+  variable: NDVI_gapfill  # variable in the file that needs imputation
+  time_slice: 
+    start: 2001-01-01T00:00:00  # start time for slicing the data
+    end: 2003-01-03T00:00:00    # end time for slicing the data
+  output_file_prefix: ./processing/outputs/var_meta_dev/var_meta_dev_ndvi  # output file prefix
+  metas:
+    - min
+    - max
+    - annual_range
+  chunks:
+    time: 256  # chunk size for processing the data
+  overwrite: true  # whether to overwrite existing output file
+  output_plot_dir: ./processing/outputs/var_meta_dev/plots_ndvi # output directory for plots
+- filename: /home/disk/rhodium/dlwp/data/era5-land/0.25deg/era5_land_0.25deg_1980-2025_3h_swvl1_imputed.nc
+  variable: swvl1  # variable in the file that needs imputation
+  time_slice: 
+    start: 2001-01-01T00:00:00  # start time for slicing the data
+    end: 2003-01-03T00:00:00    # end time for slicing the data
+  output_file_prefix: ./processing/outputs/var_meta_dev/var_meta_dev_swvl1  # output file prefix
+  metas:
+    - min
+    - max
+    - annual_range
+  chunks:
+    time: 256  # chunk size for processing the data
+  overwrite: true  # whether to overwrite existing output file
+  output_plot_dir: ./processing/outputs/var_meta_dev/plots_swvl1 # output directory for plots
+- filename: /home/disk/rhodium/dlwp/data/era5-land/0.25deg/era5_land_0.25deg_1980-2025_3h_stl1_imputed.nc
+  variable: stl1  # variable in the file that needs imputation
+  time_slice: 
+    start: 2001-01-01T00:00:00  # start time for slicing the data
+    end: 2003-01-03T00:00:00    # end time for slicing the data
+  output_file_prefix: ./processing/outputs/var_meta_dev/var_meta_dev_stl1  # output file prefix
+  metas:
+    - min
+    - max
+    - annual_range
+  chunks:
+    time: 256  # chunk size for processing the data
+  overwrite: true  # whether to overwrite existing output file
+  output_plot_dir: ./processing/outputs/var_meta_dev/plots_stl1 # output directory for plots
