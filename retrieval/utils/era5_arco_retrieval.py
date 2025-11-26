@@ -95,6 +95,8 @@ def retrieve_request(
             ds.attrs['accumulation_period'] = accumulation_period
 
         # select the times
+        if len(times)==1:
+            logger.info(f'Only seleting a single time. Assuming time-invariant field...')
         ds = ds.sel(time=times)
 
         # enforce chunking of time dimension
@@ -127,7 +129,8 @@ def main(config: str):
         # Run the retrieval request
         retrieve_request(
             variable_name=request.variable_name,
-            times=pd.date_range(start=request.time_start, end=request.time_end, freq=request.time_freq).to_numpy().astype('datetime64[ns]') ,
+            times=pd.date_range(start=request.time_start, end=request.time_end, freq=request.time_freq).to_numpy().astype('datetime64[ns]') \
+                if not request.get('constant', False) else pd.to_datetime(['1980-01-01T00:00:00']).to_numpy().astype('datetime64[ns]'),
             output_file=request.output_file,
             accumulation_period=request.get('accumulation_period', None),
             level=request.get('level', None),
