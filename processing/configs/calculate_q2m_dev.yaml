@@ -1,0 +1,15 @@
+# file with data to be imputed
+td2m_filename: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_td2m.nc
+sp_filename: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_sp.nc
+time:
+  start: 1980-01-01T00:00:00  # start time for slicing the data
+  end: 1980-01-03T00:00:00    # end time for slicing the data
+output_filename: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/calculate_q2m_dev/calculate_q2m_era5_0.25deg_1980-01-01_dev.nc
+chunks:
+  time: 256  # chunk size for processing the data
+overwrite: True
+# these are for checking calculation. If none, no plots will be made
+plot_times:
+  - 1980-01-01T00:00:00
+  - 1980-01-02T12:00:00
+output_plot_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/calculate_q2m_dev
