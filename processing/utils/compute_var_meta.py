@@ -32,13 +32,16 @@ def _calculate_min(da: xr.DataArray, newname: str, output_file_prefix: str, over
     output_filename = f"{output_file_prefix}_min.nc"
     if os.path.exists(output_filename) and not overwrite:
         logger.info(f"File {output_filename} already exists and overwrite is set to False. Skipping save.")
-        return
     else:
         with ProgressBar():
             da_min.to_netcdf(f"{output_file_prefix}_min.nc", compute=True, mode='w')
         logger.info(f"Minimum values saved to {output_file_prefix}_min.nc")
 
     if output_plot_dir:
+
+        # load cached data for plotting
+        da_min = xr.open_dataarray(f"{output_file_prefix}_min.nc")
+        
         # create output plot directory if it does not exist
         os.makedirs(output_plot_dir, exist_ok=True)
 
@@ -75,13 +78,15 @@ def _calculate_max(da: xr.DataArray, newname: str, output_file_prefix: str, over
     output_filename = f"{output_file_prefix}_max.nc"
     if os.path.exists(output_filename) and not overwrite:
         logger.info(f"File {output_filename} already exists and overwrite is set to False. Skipping save.")
-        return
     else:
         with ProgressBar():
             da_max.to_netcdf(f"{output_file_prefix}_max.nc", compute=True, mode='w')
         logger.info(f"Maximum values saved to {output_file_prefix}_max.nc")
     
     if output_plot_dir:
+        # load cached data for plotting
+        da_max = xr.open_dataarray(f"{output_file_prefix}_max.nc")
+
         # create output plot directory if it does not exist
         os.makedirs(output_plot_dir, exist_ok=True)
 
@@ -123,13 +128,15 @@ def _calculate_annual_range(da: xr.DataArray, newname:str, output_file_prefix: s
     output_filename = f"{output_file_prefix}_annual_range.nc"
     if os.path.exists(output_filename) and not overwrite:
         logger.info(f"File {output_filename} already exists and overwrite is set to False. Skipping save.")
-        return
     else:
         with ProgressBar():
             da_climo_range.to_netcdf(output_filename, compute=True, mode='w')
         logger.info(f"Annual range values saved to {output_filename}")
     
     if output_plot_dir:
+        # load cached data for plotting
+        da_climo_range = xr.open_dataarray(f"{output_file_prefix}_annual_range.nc")
+
         # create output plot directory if it does not exist
         os.makedirs(output_plot_dir, exist_ok=True)
 
