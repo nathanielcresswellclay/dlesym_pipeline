@@ -1,0 +1,6 @@
+start_date: 2000-01-01
+end_date: 2000-04-26
+day_chunk_size: 30
+credentials: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/configs/earthdata_credentials.yaml
+output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/ndvi_retrieval_dev
+overwrite: True
