@@ -1,0 +1,32 @@
+# directory containing raw downlod files 
+raw_data_dir: /home/disk/rhodium/dlwp/data/MAIAC/raw
+# file with desiured formatting 
+# native MAIAC grid will be interpolated to the grid defined in this file
+reference_file: /home/disk/rhodium/dlwp/data/era5-land/0.25deg/era5_land_0.25deg_1980-2025_3h_swvl1.nc
+# time range parameters. This will be the final time coordinates in the output file
+# missing dates linearly interpolated
+time_range_params:
+  start_date: 2000-01-01
+  end_date: 2001-01-01
+  freq: 3H
+# variable name to select
+target_var: NDVI_gapfill
+# output file is the path and name of the target processed file
+output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/maiac_0.25deg_dev_3h_ndvi.nc
+# chunks for output file. Will be applied to time dimension
+chunks: 256
+# overwrite existing output file
+overwrite: True
+# plotting parameters (optional) for quicklook generation
+plotting:
+  output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/maiac_processing_quicklook_dev
+  # time steps to plot (ISO format)
+  times:
+    - 2000-02-01T00:00:00
+    - 2000-03-01T00:00:00
+    - 2000-04-01T00:00:00
+    - 2000-04-20T03:00:00
+    - 2000-06-25T21:00:00
+    - 2000-08-15T12:00:00
+    - 2000-10-10T09:00:00
+    - 2000-12-31T18:00:00
