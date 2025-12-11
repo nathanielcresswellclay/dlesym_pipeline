@@ -95,9 +95,16 @@ def retrieve_request(
             ds.attrs['accumulation_period'] = accumulation_period
 
         # select the times
+        constant = False
         if len(times)==1:
             logger.info(f'Only seleting a single time. Assuming time-invariant field...')
+            constant = True
         ds = ds.sel(time=times)
+        # remove time dimension if constant
+        if constant:
+            ds = ds.isel(time=0)
+            ds = ds.drop('time')
+            
 
         # enforce chunking of time dimension
         # ds = ds.chunk({'time': time_chunks})

@@ -45,3 +45,7 @@ requests:
     time_freq: 3h
     overwrite: true
     output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/retrieval/outputs/era5_0.25deg_3h_tp6_test.nc
+  - variable_name: land_sea_mask
+    constant: true
+    output_file: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_0.25deg_lsm.nc
+    overwrite: True
