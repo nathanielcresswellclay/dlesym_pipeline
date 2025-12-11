@@ -1,0 +1,39 @@
+- file_name : /home/disk/rhodium/dlwp/data/MAIAC/maiac_0.25deg_2000-2025_3h_ndvi_imputed.nc
+  target_variable_name : NDVI_gapfill # this is the variable in the input file that we want to remap
+  file_variable_name : NDVI_gapfill # this is how the variable will be saved in the new file
+  prefix : /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/remap_dev/maiac_0.25deg_HPX64_2001_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 2001-01-01T00:00:00  # start time for slicing the data
+      end: 2001-02-01T01:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : False
+- file_name : /home/disk/rhodium/dlwp/data/era5-land/0.25deg/era5_land_0.25deg_1980-2025_3h_swvl1_imputed.nc
+  target_variable_name : swvl1
+  file_variable_name : swvl1
+  prefix : /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/remap_dev/era5-land_0.25deg_HPX64_2001_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 2001-01-01T00:00:00  # start time for slicing the data
+      end: 2001-02-01T01:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : False
+- file_name : /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_q2m.nc
+  target_variable_name : q2m
+  file_variable_name : q2m
+  prefix : /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/remap_dev/era5_0.25deg_HPX64_2001_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 2001-01-01T00:00:00  # start time for slicing the data
+      end: 2001-02-01T01:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : False
