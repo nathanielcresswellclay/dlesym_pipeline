@@ -14,7 +14,9 @@ python retrieval/utils/era5_arco_retrieval.py --config retrieval/configs/veggie-
 # retrieve era5-land data
 python retrieval/utils/era5-land_retrieval.py --config retrieval/configs/veggie-dltm_era5_land.yaml
 
-# retrieve MAIAC data
+# retrieve MAIAC data keeping this commented since I couldn't find an elegent way to 
+# skip previously downloaded files. Instead earthaccess produces sevreal lines of output
+# for each existing file and pollutes logs. 
 # python retrieval/utils/retrieve_maiac.py --config retrieval/configs/veggie-dltm_ndvi_retrieval.yaml
 
 ###############################################################################
@@ -33,11 +35,13 @@ python processing/utils/processing_maiac.py --config processing/configs/veggie-d
 python processing/utils/impute_maiac.py --config processing/configs/veggie-dltm_maiac_impute.yaml
 
 # calculate spatially resolved variable metadata (min, max, annual range) to be used for constant inputs 
-python /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/utils/compute_var_meta.py --config /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/configs/veggie-dltm_land-constants.yaml
+python processing/utils/compute_var_meta.py --config /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/configs/veggie-dltm_land-constants.yaml
 
 # map to hpx64 ERA5 data for coupling, ERA5-land and MAIAC NDVI for DLTM state variables, and constant inputs
-python /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/utils/map2hpx.py --config /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/configs/veggie-dltm_remap.yaml
+python processing/utils/map2hpx.py --config /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/configs/veggie-dltm_remap.yaml
 
+# Trailing average calculation for DLTM forcing variables. Here we do 48H trailing average
+python processing/utils/trailing_average.py --config processing/configs/veggie-dltm_trailing_average_atmos.yaml
 
 # generate mask for prognostic domain 
 
