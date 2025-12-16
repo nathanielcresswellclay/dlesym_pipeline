@@ -2,7 +2,7 @@
 
 # activate environment
 source /home/disk/brume/nacc/anaconda3/etc/profile.d/conda.sh
-conda activate dlesym-1.0
+conda activate dlesym-1.0-metpy
 
 ###############################################################################
 #####################    RETRIEVAL OF INPUT DATA    ###########################
@@ -15,7 +15,7 @@ python retrieval/utils/era5_arco_retrieval.py --config retrieval/configs/veggie-
 python retrieval/utils/era5-land_retrieval.py --config retrieval/configs/veggie-dltm_era5_land.yaml
 
 # retrieve MAIAC data
-python retrieval/utils/retrieve_maiac.py --config retrieval/configs/veggie-dltm_ndvi_retrieval.yaml
+# python retrieval/utils/retrieve_maiac.py --config retrieval/configs/veggie-dltm_ndvi_retrieval.yaml
 
 ###############################################################################
 ###########################    Processing...    ###############################
@@ -32,9 +32,12 @@ python processing/utils/processing_maiac.py --config processing/configs/veggie-d
 # impute maiac temporally and with constants over ocean 
 python processing/utils/impute_maiac.py --config processing/configs/veggie-dltm_maiac_impute.yaml
 
-# calculate variable metadata (min, max, annual range) to be used for constant inputs 
+# calculate spatially resolved variable metadata (min, max, annual range) to be used for constant inputs 
+python /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/utils/compute_var_meta.py --config /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/configs/veggie-dltm_land-constants.yaml
 
 # map to hpx64 ERA5 data for coupling, ERA5-land and MAIAC NDVI for DLTM state variables, and constant inputs
+python /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/utils/map2hpx.py --config /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/configs/veggie-dltm_remap.yaml
+
 
 # generate mask for prognostic domain 
 
