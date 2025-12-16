@@ -1,0 +1,17 @@
+  # file with data to be imputed
+- filename: /home/disk/rhodium/dlwp/data/MAIAC/maiac_0.25deg_2000-2025_3h_ndvi.nc
+  variable: NDVI_gapfill  # variable in the file that needs imputation
+  constant_value: -1.0  # constant value to impute over ocean
+  time_slice: 
+    start: 2001-01-01T00:00:00
+    end: 2001-02-01T00:00:00
+  chunks:
+    time: 256  # chunk size for processing the data
+  output_file: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/maiacinpute_dev/maiac_0.25deg_dev_3h_ndvi_imputed.nc # output file path
+  overwrite: True  # whether to overwrite existing output file
+  plotting:
+    output_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/maiac_impute_dev/quicklook
+    times:
+    - 2001-01-02T00:00:00
+    - 2001-01-03T00:00:00
+    - 2001-01-20T00:00:00
