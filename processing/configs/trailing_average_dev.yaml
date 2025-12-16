@@ -1,0 +1,14 @@
+  - filename : /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/remap_dev/era5_0.25deg_HPX64_2001_q2m.nc # path to intantaneous file 
+    variable_name : q2m # name of variable in dataset
+    output_variable_name : q2m-48H # name of variable in output dataset
+    ds_dt : 3h # the time resoluton of the atmos dataset
+    output_filename : /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/remap_dev/era5_0.25deg_HPX64_2001_q2m-48H.nc # output file name including path
+    influence_window : 2D # range for averaging 
+    times:
+        start: 2001-01-01T00:00:00  # start time for slicing the data
+        end: 2001-02-01T01:00:00    # end time for slicing the data
+    chunks : 
+        time : 64 # for parallel processing
+    load_first : False # if data can fit in memory, this will speed up calculations
+    overwrite : True # whether to overwrite existing files
+  

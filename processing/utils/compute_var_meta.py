@@ -53,7 +53,6 @@ def _calculate_min(da: xr.DataArray, newname: str, output_file_prefix: str, over
         fig.savefig(plot_filename)
         plt.close()
         
-
 def _calculate_max(da: xr.DataArray, newname: str, output_file_prefix: str, overwrite: bool = False, output_plot_dir: str = None):
     """
     Calculate the maximum value of the DataArray and save to netCDF.
@@ -97,9 +96,6 @@ def _calculate_max(da: xr.DataArray, newname: str, output_file_prefix: str, over
         logger.info(f"Saving max plot to {plot_filename}")
         fig.savefig(plot_filename)
         plt.close()
-
-
-    
 
 def _calculate_annual_range(da: xr.DataArray, newname:str, output_file_prefix: str, overwrite: bool, output_plot_dir: str = None):
     """
