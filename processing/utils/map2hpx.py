@@ -13,7 +13,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-from data_processing.remap.healpix import HEALPixRemap
+from processing.utils.healpix import HEALPixRemap
 
 def _remap(
         file_name,
