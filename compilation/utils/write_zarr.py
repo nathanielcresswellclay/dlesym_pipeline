@@ -17,7 +17,32 @@ from tqdm import tqdm
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def _plot_healpix(ax, data_hpx):
+def plot_healpix(ax, data_hpx):
+    """
+    Plot HEALPix data (nside=64) on a regular 1° × 1° lat–lon grid.
+
+    The input HEALPix field is remapped to latitude–longitude space using
+    the project’s `HEALPixRemap` utility and displayed with `pcolormesh`.
+
+    Parameters
+    ----------
+    ax : matplotlib.axes.Axes
+        Axes on which to draw the plot.
+    data_hpx : array-like
+        HEALPix data compatible with `HEALPixRemap.hpx2ll`.
+
+    Returns
+    -------
+    ax : matplotlib.axes.Axes
+        The input Axes.
+    im : matplotlib.collections.QuadMesh
+        The object returned by `pcolormesh`.
+
+    Raises
+    ------
+    ImportError
+        If `HEALPixRemap` cannot be imported.
+    """
 
     try:
         from processing.utils.healpix import HEALPixRemap
@@ -44,50 +69,6 @@ def _plot_healpix(ax, data_hpx):
     )
     
     return ax, im
-    
-
-
-def _plot_healpix_old(ax, data_hpx, vmin=None, vmax=None, cmap="viridis"):
-
-    if data_hpx.shape != (12, 64, 64):
-        raise ValueError("Expected data shape (12, 64, 64)")
-
-    nside = 64
-    npix = hp.nside2npix(nside)
-
-    # we have to do this reshaping.. 
-    data_hpx = np.concatenate((data_hpx[8:12], data_hpx[4:8], data_hpx[0:4]), axis=0)
-    hp_map = np.empty(npix, dtype=data_hpx.dtype)
-
-    iy, ix = np.meshgrid(
-        np.arange(nside),
-        np.arange(nside),
-        indexing="ij",
-    )
-    
-
-    for face in range(12):
-        pix = hp.xyf2pix(nside, ix, iy, face, nest=False)
-        hp_map[pix] = data_hpx[face]
-
-    fig = ax.figure
-    pos = ax.get_position()
-    fig.delaxes(ax)
-
-    hpx_ax = HpxMollweideAxes(fig, pos)
-    fig.add_axes(hpx_ax)
-
-    # projmap DRAWS and RETURNS the AxesImage
-    im = hpx_ax.projmap(
-        hp_map,
-        vmin=vmin,
-        vmax=vmax,
-        cmap=cmap,
-    )
-
-    hpx_ax.grid(True)
-
-    return hpx_ax, im
 
 def plot_times_hpx(
         ds_path: str,
@@ -137,7 +118,7 @@ def plot_times_hpx(
             ax_channel = axs_inputs.flatten()[i]
             try:
                 c = ds_time.channel_in[i]
-                ax_channel, im = _plot_healpix(
+                ax_channel, im = plot_healpix(
                     ax = ax_channel,
                     data_hpx = ds_time.inputs.sel(channel_in=c).values,
                 )
