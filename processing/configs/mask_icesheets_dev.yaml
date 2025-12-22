@@ -1,0 +1,45 @@
+# config is list of parameter groups associated with individual file-variable combinations
+# name of input file
+- filename: processing/outputs/remap_dev/maiac_0.25deg_HPX64_2001_NDVI_gapfill.nc
+# variable to access within input file
+  varname: 'NDVI_gapfill'
+  # value to be imputed over icesheets 
+  fill_value: -1.
+  # target location of processed file
+  output_filename: processing/outputs/icesheet_mask_dev/maiac_0.25deg_HPX64_2001_NDVI_gapfill_mask-ice.nc
+  # time slice for subsetting input data 
+  times:
+      start: 2001-01-01T00:00:00
+      end: 2001-02-01T01:00:00  
+  chunks: auto
+  # whether to attempt to load data into memory before saving. Defaults to chunks
+  in_memory: false
+  # whether or not to overwrite any file existing in output_filename
+  overwrite: True
+  # if true masks everything south of 60S. Useful for removing ERA5-land artifacts over antarctic sea ice
+  mask_antarctic: True
+  # sanity check plots. Times and where to save
+  plotting:
+    dir : processing/outputs/icesheet_mask_dev
+    times: 
+      - 2001-01-02T00:00:00
+      - 2001-01-15T06:00:00
+  # same parameters on next file. 
+- filename: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/remap_dev/era5-land_0.25deg_HPX64_2001_swvl1.nc
+  varname: 'swvl1'
+  fill_value: 1.
+  output_filename: processing/outputs/icesheet_mask_dev/era5-land_0.25deg_HPX64_2001_swvl1_mask-ice.nc
+  times:
+      start: 2001-01-01T00:00:00
+      end: 2001-02-01T01:00:00  
+  chunks: auto
+  in_memory: false
+  overwrite: True
+  mask_antarctic: True
+  plotting:
+    dir : processing/outputs/icesheet_mask_dev
+    times: 
+      - 2001-01-02T00:00:00
+      - 2001-01-15T06:00:00
+
+  
