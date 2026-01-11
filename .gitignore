@@ -1,5 +1,5 @@
 # directories with output in the name 
-output/
+*output*/
 # pycache files
 __pycache__/
 # Python bytecode files

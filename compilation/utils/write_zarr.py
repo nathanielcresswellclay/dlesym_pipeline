@@ -154,7 +154,7 @@ def plot_times_hpx(
             ax_channel = axs_targets.flatten()[i]
             try:
                 c = ds_time.channel_out[i]
-                ax_channel, im = _plot_healpix(
+                ax_channel, im = plot_healpix(
                     ax = ax_channel,
                     data_hpx = ds_time.targets.sel(channel_out=c).values,
                 )
@@ -190,7 +190,7 @@ def plot_times_hpx(
                 ax_channel = axs_const.flatten()[i]
                 try:
                     c = ds_time.channel_c[i]
-                    ax_channel, im = _plot_healpix(
+                    ax_channel, im = plot_healpix(
                         ax = ax_channel,
                         data_hpx = ds_time.constants.sel(channel_c=c).values,
                     )
@@ -332,9 +332,11 @@ def create_prebuilt_zarr(
     # Get constants
     constants_ds = []
     for name, filename in constants.items():
-        constants_ds.append(xr.open_dataset(
-            filename
-            ).set_coords(['lat', 'lon'])[name].astype(np.float32))
+        ds_const_temp = xr.open_dataset(filename)
+        # add lat and lon to coordinates if included in the ds
+        if 'lat' in ds_const_temp.data_vars and 'lon' in ds_const_temp.data_vars:
+            ds_const_temp = ds_const_temp.set_coords(['lat','lon'])
+        constants_ds.append(ds_const_temp[name].astype(np.float32))
     constants_ds = xr.merge(constants_ds, compat='override')
     constants_da = constants_ds.to_array('channel_c', name='constants').transpose(
         'channel_c', 'face', 'height', 'width')

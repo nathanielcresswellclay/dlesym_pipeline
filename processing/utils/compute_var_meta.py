@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+from compilation.utils.write_zarr import plot_healpix
 
 def _calculate_min(da: xr.DataArray, newname: str, output_file_prefix: str, overwrite: bool = False, output_plot_dir: str = None):
     """
@@ -23,7 +24,8 @@ def _calculate_min(da: xr.DataArray, newname: str, output_file_prefix: str, over
     
     # calculate min
     logger.info("Calculating mins temporally...")
-    da_min = da.min(dim='time', skipna=True)
+    daily_climo = da.groupby('time.dayofyear').mean(dim='time', skipna=True)
+    da_min = daily_climo.min(dim='dayofyear', skipna=True)
 
     # assign new new variable name 
     da_min = da_min.rename(newname)
@@ -47,7 +49,8 @@ def _calculate_min(da: xr.DataArray, newname: str, output_file_prefix: str, over
 
         # plot min values for a quick look
         fig, ax = plt.subplots(figsize=(10, 6))
-        im = da_min.plot(ax=ax, cmap='viridis')
+        ax, im = plot_healpix(ax,da_min.values)
+        fig.colorbar(im,ax=ax)
         plot_filename = os.path.join(output_plot_dir, f"min_plot.png")
         logger.info(f"Saving min plot to {plot_filename}")
         fig.savefig(plot_filename)
@@ -68,7 +71,8 @@ def _calculate_max(da: xr.DataArray, newname: str, output_file_prefix: str, over
     
     # calculate max
     logger.info("Calculating maxes temporally...")
-    da_max = da.max(dim='time', skipna=True)
+    daily_climo = da.groupby('time.dayofyear').mean(dim='time', skipna=True)
+    da_max = daily_climo.max(dim='dayofyear', skipna=True)
 
     # assign new new variable name 
     da_max = da_max.rename(newname)
@@ -91,7 +95,8 @@ def _calculate_max(da: xr.DataArray, newname: str, output_file_prefix: str, over
 
         # plot max values for a quick look
         fig, ax = plt.subplots(figsize=(10, 6))
-        im = da_max.plot(ax=ax, cmap='viridis')
+        ax, im = plot_healpix(ax,da_max.values)
+        fig.colorbar(im,ax=ax)
         plot_filename = os.path.join(output_plot_dir, f"max_plot.png")
         logger.info(f"Saving max plot to {plot_filename}")
         fig.savefig(plot_filename)
@@ -138,7 +143,8 @@ def _calculate_annual_range(da: xr.DataArray, newname:str, output_file_prefix: s
 
         # plot annual range values for a quick look
         fig, ax = plt.subplots(figsize=(10, 6))
-        im = da_climo_range.plot(ax=ax, cmap='viridis')
+        ax, im = plot_healpix(ax,da_climo_range.values)
+        fig.colorbar(im,ax=ax)
         plot_filename = os.path.join(output_plot_dir, f"annual_range_plot.png")
         logger.info(f"Saving annual range plot to {plot_filename}")
         fig.savefig(plot_filename)
