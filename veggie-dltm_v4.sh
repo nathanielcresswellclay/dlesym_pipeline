@@ -2,7 +2,8 @@
 
 # activate environment
 source /home/disk/brume/nacc/anaconda3/etc/profile.d/conda.sh
-conda activate dlesym-1.0-metpy
+conda activate dlesym_pipeline
+export PYTHONPATH=/home/disk/brume/nacc/veggie-dltm/dlesym_pipeline 
 
 ###############################################################################
 #####################    RETRIEVAL OF INPUT DATA    ###########################
@@ -31,11 +32,9 @@ python processing/utils/calculate_q2m.py --config processing/configs/veggie-dltm
 
 # consolidate NDVI-MAIAC into standard format
 python processing/utils/processing_maiac.py --config processing/configs/veggie-dltm_processing_maiac.yaml
+
 # impute maiac temporally and with constants over ocean 
 python processing/utils/impute_maiac.py --config processing/configs/veggie-dltm_maiac_impute.yaml
-
-# calculate spatially resolved variable metadata (min, max, annual range) to be used for constant inputs 
-python processing/utils/compute_var_meta.py --config /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/configs/veggie-dltm_land-constants.yaml
 
 # map to hpx64 ERA5 data for coupling, ERA5-land and MAIAC NDVI for DLTM state variables, and constant inputs
 python processing/utils/map2hpx.py --config /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/configs/veggie-dltm_remap.yaml
@@ -43,15 +42,18 @@ python processing/utils/map2hpx.py --config /home/disk/brume/nacc/veggie-dltm/dl
 # Trailing average calculation for DLTM forcing variables. Here we do 48H trailing average
 python processing/utils/trailing_average.py --config processing/configs/veggie-dltm_trailing_average_atmos.yaml
 
-# generate mask for prognostic domain 
+# mask out ice sheets 
+ python processing/utils/mask_icesheets.py --config processing/configs/veggie-dltm_mask_icesheets.yaml
 
-# apply mask to all land-defined fields. Will constrain spurious points over land: greenland and antarctica
+# calculat statistics on ndvi, sm and st for approximating vegetation/land type
+python processing/utils/compute_var_meta.py --config processing/configs/veggie-dltm_land-constants.yaml
 
 ###############################################################################
 ###########################     Compilation     ###############################
 ###############################################################################
 
-# compile all variables into one training dataset 
+# compile all variables into one training dataset
+python compilation/utils/write_zarr.py --config compilation/configs/veggie-dltm_zarr-compile.yaml
 
 
 

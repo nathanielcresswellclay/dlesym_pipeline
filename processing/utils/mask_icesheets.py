@@ -125,6 +125,8 @@ def mask_icesheet(
     if plotting is not None:
         logger.info(f'plotting sanity-check frames: {plotting}')
         output_dir = plotting['dir']
+        # make plotting dir
+        os.makedirs(output_dir,exist_ok=True)
         # first plot mask
         fig,ax = plt.subplots(figsize=(10,5))
         ax, im = plot_healpix(ax, mask)
