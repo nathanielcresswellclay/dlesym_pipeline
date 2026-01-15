@@ -1,0 +1,33 @@
+dst_directory: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/compilation/outputs
+dataset_name: hpx64_2001_zarr-compile_dev 
+inputs:
+  NDVI_gapfill: processing/outputs/remap_dev/maiac_0.25deg_HPX64_2001_NDVI_gapfill.nc
+  swvl1: processing/outputs/remap_dev/era5-land_0.25deg_HPX64_2001_swvl1.nc
+  q2m-48H: processing/outputs/remap_dev/era5_0.25deg_HPX64_2001_q2m-48H.nc
+outputs:
+  NDVI_gapfill: processing/outputs/remap_dev/maiac_0.25deg_HPX64_2001_NDVI_gapfill.nc
+  swvl1: processing/outputs/remap_dev/era5-land_0.25deg_HPX64_2001_swvl1.nc
+constants:
+  lsm: /home/disk/rhodium/dlwp/data/HPX64/era5_0.25deg_HPX64_lsm.nc
+  z: /home/disk/rhodium/dlwp/data/HPX64/era5_0.25deg_HPX64_z.nc
+  NDVI_gapfill_annual_range: /home/disk/rhodium/dlwp/data/HPX64/maiac_2000-2025_0.25deg_3h_HPX64_NDVI_gapfill_annual_range.nc
+# this is used to standardize the range of times 
+time_slice:
+  start: 2001-01-01T00:00:00  # start time for slicing the data
+  end: 2001-02-01T01:00:00    # end time for slicing the data
+# for more specific control over time dimension. Will be interpolated to for each dataset
+# these parameters are passed to data_range
+time_dim:
+  start: 2001-01-01T00:00:00
+  end: 2001-02-01T01:00:00 
+  freq: 3h
+# batch size of output file
+batch_size: 1
+# whether or not to overwrite any file existing at dst_path+dataset_name
+overwrite: False
+# plotting times for sanity checks
+plotting_output_dir: compilation/outputs/hpx64_2001_zarr-compile_dev_frames
+plotting_times:
+  - '2001-01-03T00:00'
+  - '2001-01-15T03:00'
+  - '2001-01-23T18:00' 
