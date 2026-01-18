@@ -20,7 +20,7 @@ constant_files:
 time_subset_start: 2015-01-01T00:00:00
 time_subset_end: 2015-02-28T21:00:00
 time_subset_freq: 3h
-output_file: /pscratch/sd/n/nacc/veggie-dltm/dlesym_pipeline/compilation/output/test_compilation.zarr
+output_file: /pscratch/sd/n/nacc/veggie-dltm/dlesym_pipeline/compilation/output/test_compilation_v2.zarr
 chunks:
   time: 1
 overwrite: true
