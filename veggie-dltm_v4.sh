@@ -49,11 +49,14 @@ python processing/utils/trailing_average.py --config processing/configs/veggie-d
 python processing/utils/compute_var_meta.py --config processing/configs/veggie-dltm_land-constants.yaml
 
 ###############################################################################
-###########################     Compilation     ###############################
+##################     Compilation & Zarr Manipulation   ######################
 ###############################################################################
 
 # compile all variables into one training dataset
 python compilation/utils/write_zarr.py --config compilation/configs/veggie-dltm_zarr-compile.yaml
+
+# log transform precipitation
+python compilation/utils/log_transform_precip.py --config compilation/configs/veggie-dltm_log-transform_precip.yaml
 
 
 
