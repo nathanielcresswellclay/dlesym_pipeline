@@ -6,11 +6,16 @@
   order : bilinear # order of the interpolation
   times:
       start: 2001-01-01T00:00:00  # start time for slicing the data
-      end: 2001-02-01T01:00:00    # end time for slicing the data
+      end: 2001-01-10T00:00:00    # end time for slicing the data
   resolution_factor : 1.0
   visualize : False # This determines whether to visualize remap. Warning: buggy
   pool_size : 1
-  overwrite : False
+  overwrite : true
+  plotting:
+    dir : processing/outputs/remap_dev/maiac_0.25deg_HPX64_2001_NDVI_gapfill_frames
+    times:
+      - 2001-01-02T00:00:00
+      - 2001-01-09T03:00:00
 - file_name : /home/disk/rhodium/dlwp/data/era5-land/0.25deg/era5_land_0.25deg_1980-2025_3h_swvl1_imputed.nc
   target_variable_name : swvl1
   file_variable_name : swvl1
@@ -19,11 +24,16 @@
   order : bilinear # order of the interpolation
   times:
       start: 2001-01-01T00:00:00  # start time for slicing the data
-      end: 2001-02-01T01:00:00    # end time for slicing the data
+      end: 2001-01-10T00:00:00    # end time for slicing the data
   resolution_factor : 1.0
   visualize : False # This determines whether to visualize remap. Warning: buggy
   pool_size : 1
-  overwrite : False
+  overwrite : true
+  plotting:
+    dir : processing/outputs/remap_dev/era5-land_0.25deg_HPX64_2001_swvl1_frames
+    times:
+      - 2001-01-02T00:00:00
+      - 2001-01-09T03:00:00
 - file_name : /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_q2m.nc
   target_variable_name : q2m
   file_variable_name : q2m
