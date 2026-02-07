@@ -30,6 +30,9 @@ python processing/utils/constant_impute_ocean.py --config processing/configs/veg
 # calculate q2m from specific humidity and dewpoint temperature
 python processing/utils/calculate_q2m.py --config processing/configs/veggie-dltm_calculate_q2m.yaml
 
+# log transform precipitation
+python processing/utils/log_transform_precip.py --config processing/configs/veggie-dltm_log_transform_precip.yaml
+
 # consolidate NDVI-MAIAC into standard format
 python processing/utils/processing_maiac.py --config processing/configs/veggie-dltm_processing_maiac.yaml
 
@@ -55,9 +58,7 @@ python processing/utils/compute_var_meta.py --config processing/configs/veggie-d
 # compile all variables into one training dataset
 python compilation/utils/write_zarr.py --config compilation/configs/veggie-dltm_zarr-compile.yaml
 
-# log transform precipitation
-python compilation/utils/log_transform_precip.py --config compilation/configs/veggie-dltm_log-transform_precip.yaml
-
-
-
-
+# tar trainset for transfer to perlmutter 
+tar -cf /home/disk/rhodium/dlwp/data/HPX64/hpx64_2000-2025_dltm-v4.zarr.tar \
+    -C /home/disk/rhodium/dlwp/data/HPX64 \
+    hpx64_2000-2025_dltm-v4.zarr
