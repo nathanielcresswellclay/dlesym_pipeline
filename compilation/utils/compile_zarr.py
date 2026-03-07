@@ -34,11 +34,13 @@ def _write_variable(
     output_file,
     time_subset=None,
     chunks=None,
+    first_variable=False,
 ):
     """
     Stream one channel block at a time into a Zarr store.
     """
-    first = True
+
+    first_channel = True
 
     for f in files:
         logger.info(
@@ -65,24 +67,35 @@ def _write_variable(
         # clear inherited encoding so Zarr uses Dask chunks
         ds.encoding.clear()
 
-        mode = "w" if first else "a"
-        append_dim = None if first else channel_dim
-
         logger.info(
             f"Writing {var_name} "
-            f"(mode={mode}, append_dim={append_dim})"
+            f"(channel_dim={channel_dim})"
         )
 
+        if first_channel:
+            res = ds
+            first_channel = False
+        else:    
+            ds = ds.assign_coords(lat=res.lat, lon=res.lon)
+            res = xr.concat([res, ds], dim=channel_dim)  
+
+    # enforce chunking
+    res = res.chunk(chunks)
+
+    if first_variable:
+        print('in first variable')
+        print(res)
         with ProgressBar():
-            ds.to_zarr(
+            res.to_zarr(
                 output_file,
-                mode=mode,
-                append_dim=append_dim,
-                consolidated=False,
+                mode='w',
             )
-
-        first = False
-
+    else: 
+        with ProgressBar():
+            res.to_zarr(
+                output_file,
+                mode="a",     
+            )
 
 def main(config: str):
     """
@@ -111,7 +124,8 @@ def main(config: str):
         channel_selector="channel_in",
         output_file=cfg.output_file,
         time_subset=time_subset,
-        chunks=dict(cfg.chunks),
+        chunks=cfg.chunks.update({'channel_in': -1}),
+        first_variable=True,
     )
 
     # ---- targets ----
@@ -122,7 +136,7 @@ def main(config: str):
         channel_selector="channel_out",
         output_file=cfg.output_file,
         time_subset=time_subset,
-        chunks=dict(cfg.chunks),
+        chunks=cfg.chunks.update({'channel_out': -1}),
     )
 
     # ---- constants ----

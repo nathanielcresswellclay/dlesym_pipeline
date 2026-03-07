@@ -1,0 +1,3 @@
+infile: /path/to/input.zarr
+outfile: /path/to/output.zarr
+time_chunks: 768
