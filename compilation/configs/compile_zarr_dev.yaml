@@ -1,24 +1,57 @@
 input_files:
-  - path: /pscratch/sd/n/nacc/training_data/era5_1980-2023_q2m-48H.zarr
+  - path: /pscratch/sd/n/nacc/training_data/hpx64_1980-2025_dltm-v4_atmos-trainset.zarr
     channel_in:
-      - q2m-48H
-  - path: /pscratch/sd/n/nacc/training_data/era5_1980-2023_z1000-48H.zarr
+    - NDVI_gapfill
+    - swvl1
+    - stl1
+    - q2m
+    - tcwv
+    - q850
+    - z1000
+    - t2m
+    - ttr6
+    - tp6
+  - path: /global/cfs/projectdirs/m4935/HPX64_dlsm/era5_hpx64_1980.zarr
     channel_in:
-      - z1000-48H
-  - path: /pscratch/sd/n/nacc/training_data/hpx64_2000-2021_3h_dltm-v3.1.zarr
-    channel_in:
-      - swvl1
+    - z500
+    - tau300-700
+    - t850
+    - z250
+    - ws10m
+    - ttr-3h
 output_files:
-  - path: /pscratch/sd/n/nacc/training_data/hpx64_2000-2021_3h_dltm-v3.1.zarr
+  - path: /pscratch/sd/n/nacc/training_data/hpx64_1980-2025_dltm-v4_atmos-trainset.zarr
     channel_out:
-      - swvl1
+    - q2m
+    - tcwv
+    - q850
+    - z1000
+    - t2m
+    - ttr6
+  - path: /global/cfs/projectdirs/m4935/HPX64_dlsm/era5_hpx64_1980.zarr
+    channel_out:
+    - z500
+    - tau300-700
+    - t850
+    - z250
+    - ws10m
+    - ttr-3h
 constant_files:
-  - path: /pscratch/sd/n/nacc/training_data/hpx64_2000-2021_3h_dltm-v3.1.zarr
+  - path: /pscratch/sd/n/nacc/training_data/hpx64_1980-2025_dltm-v4_atmos-trainset.zarr
     channel_c:
-      - lsm
-      - slt
+    - lsm
+    - z
+    - NDVI_gapfill_min
+    - NDVI_gapfill_max
+    - NDVI_gapfill_annual_range
+    - swvl1_min
+    - swvl1_max
+    - swvl1_annual_range
+    - stl1_min
+    - stl1_max
+    - stl1_annual_range
 time_subset_start: 2015-01-01T00:00:00
-time_subset_end: 2015-02-28T21:00:00
+time_subset_end: 2015-01-28T21:00:00
 time_subset_freq: 3h
 output_file: /pscratch/sd/n/nacc/veggie-dltm/dlesym_pipeline/compilation/output/test_compilation_v2.zarr
 chunks:
