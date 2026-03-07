@@ -48,7 +48,7 @@ def trailing_average(
     try:
         result = da.rolling(sample=window_size, center=False).mean()
     except KeyError:
-        print(f'key error in rolling average, using time instead of sample for rolling average dim...')
+        logger.warning(f'key error in rolling average, using time instead of sample for rolling average dim...')
         result = da.rolling(time=window_size, center=False).mean()
 
     # enforce chunks 

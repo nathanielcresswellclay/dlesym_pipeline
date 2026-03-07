@@ -86,7 +86,15 @@ def main(config):
     logger.info(f'Opening reference dataset for regridding: {config.reference_file}')
     ref_ds = xr.open_dataset(config.reference_file)
     logger.info(f'Regridding to reference dataset grid with shape {ref_ds.dims}')
-    ds = ds.interp(latitude=ref_ds.latitude, longitude=ref_ds.longitude, method='nearest') # interp call sorts coords automatically
+    # fix lon dims
+    ds = ds.sortby("longitude")
+
+    # ds = ds.interp(latitude=ref_ds.latitude, longitude=ref_ds.longitude, method='nearest') # interp call sorts coords automatically
+    ds = ds.reindex(
+        latitude=ref_ds.latitude,
+        longitude=ref_ds.longitude,
+        method="nearest",
+    )
 
     # enforce chunking for parallel write 
     ds = ds.chunk(time=config.chunks)

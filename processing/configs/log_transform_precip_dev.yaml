@@ -1,0 +1,14 @@
+input_filename: /home/disk/rhodium/dlwp/data/era5/0.25deg/era5_1980-2025_0.25deg_3h_tp6.nc
+output_filename: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/log_transform_precip_dev/era5_jan1980_0.25deg_3h_tp6-lt1e-8.nc
+epsilon: 1e-8
+time:
+  start: 1980-01-01T00:00:00
+  end: 1980-01-05T00:00:00
+chunks:
+  time: 256
+overwrite: True 
+# optionally plot distribution before and after transformation
+plot_time_slice:
+  start: 1980-01-01T00:00:00
+  end: 1980-01-05T00:00:00
+output_plot_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/log_transform_precip_dev
