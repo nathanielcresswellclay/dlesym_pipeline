@@ -1,0 +1,5 @@
+input_file: /pscratch/sd/n/nacc/training_data/hpx64_1980-2025_dltm-v4_atmos-trainset_full.zarr
+log_file: /pscratch/sd/n/nacc/veggie-dltm/dlesym_pipeline/compilation/output/dltm-v4_atmos_trainset_scale_params_dev.log
+time_range:
+  start: 2023-01-01
+  end: 2023-01-31
