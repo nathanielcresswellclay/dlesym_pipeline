@@ -1,0 +1,30 @@
+ttr_filename: /home/disk/mercury2/nacc/AIMIP2026/init_data/ttr1h_HPX64_ttr1h.nc
+olr_filename: /home/disk/rhodium/dlwp/data/HPX64/isccp_0.25deg_3h_HPX64_1983-2017_olr.nc
+overwrite: true
+chunks:
+  time: none
+output_filename: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/transform_ttr1h-olr_dev/ttr1h_HPX64_olr.nc
+in_memory: true
+constraints:
+  min_quantile: 0.00005
+  global_floor: true
+plotting:
+  dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/transform_ttr1h-olr_dev/frames
+  vmin: 100
+  vmax: 800
+  source_times:
+    - 1985-10-01T00:00:00
+    - 1985-10-02T00:00:00
+    - 1985-10-03T00:00:00
+    - 1985-10-04T00:00:00
+    - 1985-10-05T00:00:00
+    - 1985-10-06T00:00:00
+    - 1985-10-07T00:00:00
+  target_times:
+    - 1978-10-01T00:00:00
+    - 1978-10-02T00:00:00
+    - 1978-10-03T00:00:00
+    - 1978-10-04T00:00:00
+    - 1978-10-05T00:00:00
+    - 1978-10-06T00:00:00
+    - 1978-10-07T00:00:00
