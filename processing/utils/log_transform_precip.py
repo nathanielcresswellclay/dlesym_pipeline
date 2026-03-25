@@ -18,7 +18,8 @@ def main(config):
         logger.info(f"Openning data from {config.input_filename}...")
 
         # open total precipitation data
-        ds_tp6 = xr.open_dataset(config.input_filename, chunks='auto')['total_precipitation']
+        ds_tp6 = xr.open_dataset(config.input_filename, 
+            chunks=OmegaConf.to_container(config.chunks))['total_precipitation']
 
         # if time slice is provided, select it
         if config.time is not None:
@@ -30,9 +31,6 @@ def main(config):
         ds_tp6 = np.log(ds_tp6 + config.epsilon) - np.log(config.epsilon)
         # rename variable
         ds_tp6 = ds_tp6.rename(f'tp6-lt{config.epsilon}')
-
-        # enforce chunks on output
-        ds_tp6 = ds_tp6.chunk(config.chunks)
 
         # save to netCDF in chunks
         logger.info(f'Saving log transformed precipitation to {config.output_filename}...')
