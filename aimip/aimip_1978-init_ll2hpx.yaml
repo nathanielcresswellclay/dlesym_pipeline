@@ -1,0 +1,162 @@
+- file_name : /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_500.nc
+  target_variable_name : z500
+  file_variable_name : geopotential
+  prefix : /home/disk/mercury2/nacc/AIMIP2026/init_data/z500_HPX64_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 1978-10-01T00:00:00  # start time for slicing the data
+      end: 1978-10-07T00:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : false
+  plotting:
+    dir : /home/disk/mercury2/nacc/AIMIP2026/init_data/z500_HPX64_frames
+    times:
+      - 1978-10-01T00:00:00
+      - 1978-10-02T12:00:00
+- file_name : /home/disk/mercury2/nacc/AIMIP2026/init_data/tau300-700.nc
+  target_variable_name : tau300-700
+  file_variable_name : tau300-700
+  prefix : /home/disk/mercury2/nacc/AIMIP2026/init_data/tau300-700_HPX64_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 1978-10-01T00:00:00  # start time for slicing the data
+      end: 1978-10-07T00:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : false
+  plotting:
+    dir : /home/disk/mercury2/nacc/AIMIP2026/init_data/tau300-700_HPX64_frames
+    times:
+      - 1978-10-01T00:00:00
+      - 1978-10-02T12:00:00
+- file_name : /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_1000.nc
+  target_variable_name : z1000
+  file_variable_name : geopotential
+  prefix : /home/disk/mercury2/nacc/AIMIP2026/init_data/z1000_HPX64_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 1978-10-01T00:00:00  # start time for slicing the data
+      end: 1978-10-07T00:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : false
+  plotting:
+    dir : /home/disk/mercury2/nacc/AIMIP2026/init_data/z1000_HPX64_frames
+    times:
+      - 1978-10-01T00:00:00
+      - 1978-10-02T12:00:00
+- file_name : /home/disk/mercury2/nacc/AIMIP2026/init_data/2m_temperature.nc
+  target_variable_name : t2m0
+  file_variable_name : 2m_temperature
+  prefix : /home/disk/mercury2/nacc/AIMIP2026/init_data/t2m0_HPX64_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 1978-10-01T00:00:00  # start time for slicing the data
+      end: 1978-10-07T00:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : false
+  plotting:
+    dir : /home/disk/mercury2/nacc/AIMIP2026/init_data/t2m0_HPX64_frames
+    times:
+      - 1978-10-01T00:00:00
+      - 1978-10-02T12:00:00
+- file_name : /home/disk/mercury2/nacc/AIMIP2026/init_data/total_column_water_vapour.nc
+  target_variable_name : tcwv0
+  file_variable_name : total_column_water_vapour
+  prefix : /home/disk/mercury2/nacc/AIMIP2026/init_data/tcwv0_HPX64_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 1978-10-01T00:00:00  # start time for slicing the data
+      end: 1978-10-07T00:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : false
+  plotting:
+    dir : /home/disk/mercury2/nacc/AIMIP2026/init_data/tcwv0_HPX64_frames
+    times:
+      - 1978-10-01T00:00:00
+      - 1978-10-02T12:00:00
+- file_name : /home/disk/mercury2/nacc/AIMIP2026/init_data/temperature_850.nc
+  target_variable_name : t850
+  file_variable_name : temperature
+  prefix : /home/disk/mercury2/nacc/AIMIP2026/init_data/t850_HPX64_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 1978-10-01T00:00:00  # start time for slicing the data
+      end: 1978-10-07T00:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : false
+  plotting:
+    dir : /home/disk/mercury2/nacc/AIMIP2026/init_data/t850_HPX64_frames
+    times:
+      - 1978-10-01T00:00:00
+      - 1978-10-02T12:00:00
+- file_name : /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_250.nc
+  target_variable_name : z250
+  file_variable_name : geopotential
+  prefix : /home/disk/mercury2/nacc/AIMIP2026/init_data/z250_HPX64_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 1978-10-01T00:00:00  # start time for slicing the data
+      end: 1978-10-07T00:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : false
+  plotting:
+    dir : /home/disk/mercury2/nacc/AIMIP2026/init_data/z250_HPX64_frames
+    times:
+      - 1978-10-01T00:00:00
+      - 1978-10-02T12:00:00
+- file_name : /home/disk/mercury2/nacc/AIMIP2026/init_data/10m_windspeed.nc
+  target_variable_name : ws10 # this is the variable in the input file that we want to remap
+  file_variable_name : ws10 # this is how the variable will be saved in the new file
+  prefix : /home/disk/mercury2/nacc/AIMIP2026/init_data/10m_windspeed_HPX64_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 1978-10-01T00:00:00  # start time for slicing the data
+      end: 1978-10-07T00:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : false
+  plotting:
+    dir : /home/disk/mercury2/nacc/AIMIP2026/init_data/10m_windspeed_HPX64_frames
+    times:
+      - 1978-10-01T00:00:00
+      - 1978-10-02T12:00:00
+- file_name : /home/disk/mercury2/nacc/AIMIP2026/init_data/top_net_thermal_radiation.nc
+  target_variable_name : ttr1h
+  file_variable_name : top_net_thermal_radiation
+  prefix : /home/disk/mercury2/nacc/AIMIP2026/init_data/ttr1h_HPX64_
+  nside : 64
+  order : bilinear # order of the interpolation
+  times:
+      start: 1978-10-01T00:00:00  # start time for slicing the data
+      end: 1978-10-07T00:00:00    # end time for slicing the data
+  resolution_factor : 1.0
+  visualize : False # This determines whether to visualize remap. Warning: buggy
+  pool_size : 1
+  overwrite : false
+  plotting:
+    dir : /home/disk/mercury2/nacc/AIMIP2026/init_data/ttr1h_HPX64_frames
+    times:
+      - 1978-10-01T00:00:00
+      - 1978-10-02T12:00:00

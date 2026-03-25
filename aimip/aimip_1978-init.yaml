@@ -1,0 +1,88 @@
+requests:
+  - variable_name: 10m_u_component_of_wind
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/10m_u_component_of_wind.nc
+    overwrite: False
+  - variable_name: 10m_v_component_of_wind
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/10m_v_component_of_wind.nc
+    overwrite: False
+  - variable_name: total_column_water_vapour
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/total_column_water_vapour.nc
+    overwrite: False
+  - variable_name: 2m_temperature
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    overwrite: False
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/2m_temperature.nc
+  - variable_name: top_net_thermal_radiation
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    accumulation_period: 1
+    overwrite: False
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/top_net_thermal_radiation.nc
+  - variable_name: temperature
+    level: 850.
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-06T00:00:00
+    time_freq: 3h
+    overwrite: False
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/temperature_850.nc
+  - variable_name: geopotential
+    level: 1000.
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    overwrite: False
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_1000.nc
+  - variable_name: geopotential
+    level: 500.
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    overwrite: False
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_500.nc
+  - variable_name: geopotential
+    level: 700.
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    overwrite: False
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_700.nc
+  - variable_name: geopotential
+    level: 300.
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    overwrite: False
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_300.nc
+  - variable_name: geopotential
+    level: 250.
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    overwrite: False
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_250.nc
+  - variable_name: sea_surface_temperature
+    time_start: 1978-10-01T00:00:00
+    time_end: 1978-10-07T00:00:00
+    time_freq: 3h
+    overwrite: False
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/sea_surface_temperature.nc
+  - variable_name: land_sea_mask
+    constant: true
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/land_sea_mask.nc
+    overwrite: False
+  - variable_name: geopotential_at_surface
+    constant: true
+    output_file: /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_at_surface.nc
+    overwrite: False

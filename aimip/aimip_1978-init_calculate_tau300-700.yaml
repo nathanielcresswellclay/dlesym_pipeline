@@ -1,0 +1,34 @@
+# Calculate windspeed development config
+#
+# This config is used by `processing/utils/calculate_tau300-700.py` to compute
+# the scalar tau300-700 from the z300 and z700 components:
+#
+#   tau300-700 = z300 - z700
+#
+# Expected input:
+# - `file_z300` contains a variable named `geopotential` with a `time` coordinate
+# - `v_filename` contains a variable named `v10` with a `time` coordinate
+# - Both files must cover the requested time slice
+# - `time.start` and `time.end` are ISO timestamps (inclusive via `sel(time=slice(...))`)
+
+file_z300: /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_300.nc
+file_z700: /home/disk/mercury2/nacc/AIMIP2026/init_data/geopotential_700.nc
+time:
+  # Time window to read from the input datasets
+  start: 1978-10-01T00:00:00
+  end: 1978-10-07T00:00:00
+chunks:
+  # Chunk sizes passed to xarray/dask along each dimension.
+  # This config only specifies time chunking.
+  time: 256
+# If true, recompute even when `output_filename` already exists.
+overwrite: False
+plot_times:
+  # Timestamps (must exist in the output time coordinate) for which the script
+  # will generate PNG plots.
+  - 1978-10-01T00:00:00
+  - 1978-10-02T12:00:00
+# Directory where PNG plots are written.
+output_plot_dir: /home/disk/mercury2/nacc/AIMIP2026/init_data/tau300-700_frames
+# NetCDF output path for the computed windspeed field (variable name `ws10`).
+output_filename: /home/disk/mercury2/nacc/AIMIP2026/init_data/tau300-700.nc

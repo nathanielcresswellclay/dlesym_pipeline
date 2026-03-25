@@ -1,0 +1,51 @@
+dst_directory: /home/disk/mercury2/nacc/AIMIP2026/init_data
+dataset_name: aimip_1978-init
+inputs:
+  z500: /home/disk/mercury2/nacc/AIMIP2026/init_data/z500_HPX64_z500.nc
+  tau300-700: /home/disk/mercury2/nacc/AIMIP2026/init_data/tau300-700_HPX64_tau300-700.nc
+  z1000: /home/disk/mercury2/nacc/AIMIP2026/init_data/z1000_HPX64_z1000.nc
+  t2m0: /home/disk/mercury2/nacc/AIMIP2026/init_data/t2m0_HPX64_t2m0.nc
+  tcwv0: /home/disk/mercury2/nacc/AIMIP2026/init_data/tcwv0_HPX64_tcwv0.nc
+  t850: /home/disk/mercury2/nacc/AIMIP2026/init_data/t850_HPX64_t850.nc
+  z250: /home/disk/mercury2/nacc/AIMIP2026/init_data/z250_HPX64_z250.nc
+  ws10: /home/disk/mercury2/nacc/AIMIP2026/init_data/10m_windspeed_HPX64_ws10.nc
+  olr: /home/disk/mercury2/nacc/AIMIP2026/init_data/ttr1h_HPX64_olr.nc
+  sst: /home/disk/mercury2/nacc/AIMIP2026/DLESyM/aimip/forcing_data/ERA5-0.25deg-monthly-mean-forcing-1978-2024_HPX64_sst.nc
+outputs:
+  z500: /home/disk/mercury2/nacc/AIMIP2026/init_data/z500_HPX64_z500.nc
+  tau300-700: /home/disk/mercury2/nacc/AIMIP2026/init_data/tau300-700_HPX64_tau300-700.nc
+  z1000: /home/disk/mercury2/nacc/AIMIP2026/init_data/z1000_HPX64_z1000.nc
+  t2m0: /home/disk/mercury2/nacc/AIMIP2026/init_data/t2m0_HPX64_t2m0.nc
+  tcwv0: /home/disk/mercury2/nacc/AIMIP2026/init_data/tcwv0_HPX64_tcwv0.nc
+  t850: /home/disk/mercury2/nacc/AIMIP2026/init_data/t850_HPX64_t850.nc
+  z250: /home/disk/mercury2/nacc/AIMIP2026/init_data/z250_HPX64_z250.nc
+  ws10: /home/disk/mercury2/nacc/AIMIP2026/init_data/10m_windspeed_HPX64_ws10.nc
+  olr: /home/disk/mercury2/nacc/AIMIP2026/init_data/ttr1h_HPX64_olr.nc
+  sst: /home/disk/mercury2/nacc/AIMIP2026/DLESyM/aimip/forcing_data/ERA5-0.25deg-monthly-mean-forcing-1978-2024_HPX64_sst.nc
+constants:
+  lsm: /home/disk/rhodium/dlwp/data/HPX64/era5_0.25deg_3h_HPX64_1950-2022_lsm.nc
+  z: /home/disk/rhodium/dlwp/data/HPX64/era5_0.25deg_3h_HPX64_1979-2021_topography.nc
+# this is used to standardize the range of times 
+time_slice:
+  start: 1978-10-01T00:00:00  # start time for slicing the data
+  end: 1978-10-07T00:00:00    # end time for slicing the data
+# for more specific control over time dimension. Will be interpolated to for each dataset
+# these parameters are passed to data_range
+time_dim:
+  start: 1978-10-01T00:00:00
+  end: 1978-10-07T00:00:00 
+  freq: 3h
+# batch size of output file
+batch_size: 1
+# whether or not to overwrite any file existing at dst_path+dataset_name
+overwrite: False
+# plotting times for sanity checks
+plotting_output_dir: /home/disk/mercury2/nacc/AIMIP2026/init_data/aimip_1978-init_zarr-compile_frames
+plotting_times:
+  - '1978-10-01T00:00:00'
+  - '1978-10-02T00:00:00'
+  - '1978-10-03T00:00:00'
+  - '1978-10-04T00:00:00'
+  - '1978-10-05T00:00:00'
+  - '1978-10-06T00:00:00'
+  - '1978-10-07T00:00:00'
