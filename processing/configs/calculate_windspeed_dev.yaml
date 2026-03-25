@@ -1,0 +1,38 @@
+# Calculate windspeed development config
+#
+# This config is used by `processing/utils/calculate_windspeed.py` to compute
+# the scalar 10m windspeed magnitude from the horizontal wind components:
+#
+#   ws10 = sqrt(u10^2 + v10^2)
+#
+# Expected input:
+# - `u_filename` contains a variable named `u10` with a `time` coordinate
+# - `v_filename` contains a variable named `v10` with a `time` coordinate
+# - Both files must cover the requested time slice
+# - `time.start` and `time.end` are ISO timestamps (inclusive via `sel(time=slice(...))`)
+#
+# Expected output:
+# - `output_filename` is the NetCDF file written by `xarray.Dataset.to_netcdf(...)`
+# - `output_plot_dir` must exist, since the script saves PNGs there
+
+u_filename: /home/disk/mercury2/nacc/AIMIP2026/init_data/10m_u_component_of_wind.nc
+v_filename: /home/disk/mercury2/nacc/AIMIP2026/init_data/10m_v_component_of_wind.nc
+time:
+  # Time window to read from the input datasets
+  start: 1978-10-01T00:00:00
+  end: 1978-10-07T00:00:00
+chunks:
+  # Chunk sizes passed to xarray/dask along each dimension.
+  # This config only specifies time chunking.
+  time: 256
+# If true, recompute even when `output_filename` already exists.
+overwrite: True
+plot_times:
+  # Timestamps (must exist in the output time coordinate) for which the script
+  # will generate PNG plots.
+  - 1978-10-01T00:00:00
+  - 1978-10-02T12:00:00
+# Directory where PNG plots are written.
+output_plot_dir: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/calculate_windspeed_dev
+# NetCDF output path for the computed windspeed field (variable name `ws10`).
+output_filename: /home/disk/brume/nacc/veggie-dltm/dlesym_pipeline/processing/outputs/calculate_windspeed_dev/calculate_windspeed_dev.nc
