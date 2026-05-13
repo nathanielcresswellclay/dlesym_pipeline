@@ -36,3 +36,5 @@ python processing/utils/transform_ttr1h_olr.py --config aimip/aimip_1978-init_tr
 # compile all variables into one training dataset
 python compilation/utils/write_zarr.py --config aimip/aimip_1978-init_zarr-write.yaml
 
+# create dummy ocean init dataset (this is necessary to initialize forcing ocean module but won't contain any data)
+python aimip/create_dummy_ocean_init.py --ref-dataset /home/disk/mercury2/nacc/AIMIP2026/init_data/aimip_1978-init.zarr --output-dataset /home/disk/mercury2/nacc/AIMIP2026/init_data/aimip_1978-init_ocean.zarr
