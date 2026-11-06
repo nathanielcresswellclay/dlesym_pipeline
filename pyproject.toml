@@ -1,0 +1,50 @@
+[project]
+name = "dlesym-pipeline"
+version = "0.1.0"
+description = "Retrieval, processing and compilation of training/init data for DLESyM-style models"
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+
+# Direct dependencies only (what the pipeline scripts import, plus the I/O
+# backends xarray needs). Versions mirror dlesym_pipeline.yml; transitive
+# packages from the conda export are left to the resolver.
+dependencies = [
+    "numpy==1.23.4",
+    "pandas==1.5.1",
+    "scipy==1.11.2",
+    "xarray==2022.11.0",
+    "dask[array,diagnostics]==2022.11.1",
+    "zarr==2.13.3",
+    "numcodecs==0.10.2",
+    "netcdf4>=1.5.8,<1.7",
+    "h5py==3.11.0",
+    "fsspec==2024.12.0",
+    "gcsfs==2024.12.0",
+    "omegaconf==2.2.3",
+    "hydra-core==1.2.0",
+    "pyyaml==6.0.1",
+    "tqdm==4.64.1",
+    "matplotlib==3.5.2",
+    "cartopy>=0.22,<0.23",
+    "shapely==1.8.4",
+    "pyproj==3.3.1",
+    "healpy==1.16.5",
+    "astropy==5.3.2",
+    "astropy-healpix==1.0.0",
+    "reproject==0.11.0",
+    "metpy==1.7.1",
+    "cdsapi==0.7.5",
+    "earthaccess",  # imported by retrieval/utils/retrieve_maiac.py; absent from the conda env
+]
+
+[dependency-groups]
+dev = [
+    "black==23.9.1",
+    "ipykernel==6.29.4",
+    "jupyterlab==4.2.1",
+    "seaborn==0.13.2",
+    "statsmodels==0.14.2",
+]
+
+[tool.uv]
+package = false  # scripts run from the repo root, not an installable package

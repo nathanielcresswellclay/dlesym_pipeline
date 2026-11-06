@@ -36,17 +36,16 @@ stages together for a specific dataset.
 
 ## Environment
 
-The pipeline runs in a conda environment called `dlesym_pipeline`, defined
-by [`dlesym_pipeline.yml`](dlesym_pipeline.yml) (Python 3.10, PyTorch +
-CUDA 11.7, xarray, zarr, healpy, cdsapi, hydra/omegaconf, dask, and the
-usual scientific Python stack).
-
-To create it:
+Dependencies are managed with [uv](https://docs.astral.sh/uv/) via
+[`pyproject.toml`](pyproject.toml) (Python 3.10):
 
 ```bash
-conda env create -f dlesym_pipeline.yml
-conda activate dlesym_pipeline
+uv sync                      # core + dev group into .venv
+source .venv/bin/activate    # or prefix commands with `uv run`
 ```
+
+The legacy conda spec, [`dlesym_pipeline.yml`](dlesym_pipeline.yml), is kept
+for reference.
 
 Then, before running any stage script, point `PYTHONPATH` at the repo root
 so the cross-stage imports (e.g. `from compilation.utils.write_zarr import

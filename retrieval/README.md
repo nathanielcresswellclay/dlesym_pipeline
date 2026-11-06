@@ -13,3 +13,20 @@ conda activate sh_env_wyik
 Make sure your working directory is dlesym_pipline. And finally run you python utility:  
 
 `python ./retrieval/utils/era5_arco_retrieval.py --config ./retrieval/configs/arco_retrieval_dev.yaml`
+
+
+# ERA5 retrieval sources
+
+Two utilities share the same request schema (`variable_name`, optional `level`,
+`time_start`/`time_end`/`time_freq`, `accumulation_period`, `constant`,
+`output_file`, `overwrite`) and produce interchangeable netcdf output:
+
+- `era5_arco_retrieval.py` — Google ARCO-ERA5 (anonymous, fast, no account).
+- `era5_cds_retrieval.py` — Copernicus CDS via `cdsapi`. Requires a CDS account,
+  accepted dataset licences, and a `~/.cdsapirc` file. Requests are issued
+  per month and queued by CDS, so large jobs can take a while.
+
+`python ./retrieval/utils/era5_cds_retrieval.py --config ./retrieval/configs/cds_retrieval_dev.yaml`
+
+Accumulated variables (`accumulation_period`) are fetched hourly (with a
+look-back padding) and summed over the trailing window, matching the arco utility.
